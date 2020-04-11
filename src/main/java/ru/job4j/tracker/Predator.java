@@ -5,4 +5,9 @@ public class Predator extends Animal {
         super();
         System.out.println("load Predator");
     }
+
+    public Predator(String name) {
+        this.name = name;
+    }
 }
+
