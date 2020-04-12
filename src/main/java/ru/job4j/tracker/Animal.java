@@ -1,7 +1,7 @@
 package ru.job4j.tracker;
 
 public class Animal {
-    String name;
+    private String name;
 
     public Animal() {
         System.out.println("load Animal");
