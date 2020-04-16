@@ -12,6 +12,10 @@ public class Tracker {
     private final Item[] items = new Item[100];
     private int position = 0;
 
+    public int getSize() {
+        return position;
+    }
+
     /**
      *
      * @param item
@@ -89,6 +93,19 @@ public class Tracker {
         return rzl;
     }
 
+    public boolean delete(String id) {
+        boolean rzl = false;
+        int index = indexOf(id);
+        if (index != -1) {
+            items[index] = null;
+            System.arraycopy(items, index + 1, items, index, position - (index + 1));
+            items[position - 1] = null;
+            position--;
+            rzl = true;
+        }
+        return rzl;
+    }
+
     /**
      *
      * @param id
@@ -120,14 +137,17 @@ public class Tracker {
 
     public static void main(String[] args) {
         Tracker library = new Tracker();
+
         Item book = new Item("Book");
         library.add(book);
         Item cd = new Item("CD");
         library.add(cd);
 
+        System.out.println(library.getSize());
         System.out.println(book.getId() + " - " + book.getName());
         System.out.println(cd.getId() + " - " + cd.getName());
-
-
+        System.out.println("index CD до удаления book - " + library.indexOf(cd.getId()));
+        library.delete(book.getId());
+        System.out.println("index CD после удаления book - " + library.indexOf(cd.getId()));
     }
 }
