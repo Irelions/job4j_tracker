@@ -58,4 +58,18 @@ public class TrackerTest {
         Item result = tracker.findById(itemOne.getId());
         assertThat(result.getId(), is(itemOne.getId()));
     }
+
+    @Test
+    public void testReplace() {
+        Tracker tracker = new Tracker();
+        Item itemOne = new Item("One");
+        Item itemTwo = new Item("Two");
+        tracker.add(itemOne);
+
+        String temp = itemOne.getId();
+        boolean result = tracker.replace(itemOne.getId(), itemTwo);
+        String resultName = (tracker.findById(temp)).getName();
+        assertEquals(itemTwo.getName(), resultName);
+        assertEquals(result, true);
+    }
 }

@@ -48,16 +48,8 @@ public class Tracker {
      * @return элемент Item по индексу id
      */
     public Item findById(String id) {
-        Item[] array = items;
-        Item rzt = null;
-        for (int i = 0; i < position; i++) {
-            Item temp = array[i];
-            if (temp.getId() == id) {
-                rzt = temp;
-                break;
-            }
-        }
-        return rzt;
+        int index = indexOf(id);
+        return index != -1 ? items[index] : null;
     }
 
     /**
@@ -78,6 +70,39 @@ public class Tracker {
         }
         arrayFindByName = Arrays.copyOf(arrayFindByName, count);
         return arrayFindByName;
+    }
+
+    /**
+     *
+     * @param id
+     * @param item
+     * @return Состоялась ли замена в Items[] по индексу id элементом Item
+     */
+    public boolean replace(String id, Item item) {
+        boolean rzl = false;
+        int index = indexOf(id);
+        if (index != -1) {
+            item.setId(id);
+            items[index] = item;
+            rzl = true;
+        }
+        return rzl;
+    }
+
+    /**
+     *
+     * @param id
+     * @return индекс элемента массива Item[] (поиск по id)
+     */
+    private int indexOf(String id) {
+        int rzl = -1;
+        for (int i = 0; i < position; i++) {
+            if (items[i].getId().equals(id)) {
+                rzl = i;
+                break;
+            }
+        }
+        return rzl;
     }
 
     /**
