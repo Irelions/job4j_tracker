@@ -133,20 +133,4 @@ public class Tracker {
         }
         return String.valueOf(tmp + System.currentTimeMillis());
     }
-
-    public static void main(String[] args) {
-        Tracker library = new Tracker();
-
-        Item book = new Item("Book");
-        library.add(book);
-        Item cd = new Item("CD");
-        library.add(cd);
-
-        System.out.println(library.getSize());
-        System.out.println(book.getId() + " - " + book.getName());
-        System.out.println(cd.getId() + " - " + cd.getName());
-        System.out.println("index CD до удаления book - " + library.indexOf(cd.getId()));
-        library.delete(book.getId());
-        System.out.println("index CD после удаления book - " + library.indexOf(cd.getId()));
-    }
 }
