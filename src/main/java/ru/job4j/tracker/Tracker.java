@@ -42,8 +42,7 @@ public class Tracker {
                 count++;
             }
         }
-        arrayWithoutNull = Arrays.copyOf(arrayWithoutNull, count);
-        return arrayWithoutNull;
+        return Arrays.copyOf(arrayWithoutNull, count);
     }
 
     /**
@@ -63,7 +62,7 @@ public class Tracker {
      */
     public Item[] findByName(String key) {
         Item[] array = items;
-        Item[] arrayFindByName = new Item[items.length];
+        Item[] arrayFindByName = new Item[position];
         int count = 0;
         for (int i = 0; i < position; i++) {
             Item temp = array[i];
