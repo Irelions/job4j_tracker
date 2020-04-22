@@ -52,6 +52,7 @@ public class StartUI {
         System.out.println("Add - OK!");
         System.out.println();
     }
+
     public static void showAll(Tracker tracker) {
         System.out.println();
         System.out.println("=== Show all items ===");
@@ -61,6 +62,7 @@ public class StartUI {
         }
         System.out.println();
     }
+
     public static void editItem(Input input, Tracker tracker) {
         System.out.println();
         System.out.println("=== Edit item ===");
@@ -74,6 +76,7 @@ public class StartUI {
         }
         System.out.println();
     }
+
     public static void deleteItem(Input input, Tracker tracker) {
         System.out.println();
         System.out.println("=== Delete item ===");
@@ -85,21 +88,31 @@ public class StartUI {
         }
         System.out.println();
     }
+
     public static void findItemById(Input input, Tracker tracker) {
         System.out.println("=== Find item by Id ===");
         System.out.print("Enter ID: ");
         String id = input.askStr("Enter ID: ");
         Item itemTemp = tracker.findById(id);
-        System.out.println(itemTemp);
+        if (itemTemp == null) {
+            System.out.println(id + " not found.");
+        } else {
+            System.out.println(itemTemp);
+        }
         System.out.println();
     }
+
     public static void findeItemsByName(Input input, Tracker tracker) {
         System.out.println();
         System.out.println("=== Find items by name ===");
         String name = input.askStr("Enter Find name: ");
         Item[] itemsTemp = tracker.findByName(name);
-        for (int i = 0; i < itemsTemp.length; i++) {
-            System.out.println(itemsTemp[i]);
+        if (itemsTemp.length < 1) {
+            System.out.println(name + " not found.");
+        } else {
+            for (int i = 0; i < itemsTemp.length; i++) {
+                System.out.println(itemsTemp[i]);
+            }
         }
         System.out.println();
     }
@@ -108,6 +121,5 @@ public class StartUI {
         Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
         new StartUI().init(input, tracker);
-
     }
 }
