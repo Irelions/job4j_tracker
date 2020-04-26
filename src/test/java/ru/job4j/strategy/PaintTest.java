@@ -1,5 +1,7 @@
 package ru.job4j.strategy;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -9,15 +11,25 @@ import static org.junit.Assert.assertThat;
 import java.util.StringJoiner;
 
 public class PaintTest {
+    //Поле содержит дефолтный вывод в консоль
+    private final PrintStream stdout = System.out;
+    //Буфер для результата
+    private  final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+    @Before
+    public void loadOutput() {
+        System.out.println("execute before method");
+        System.setOut(new PrintStream(this.out));
+    }
+
+    @After
+    public void backOutput() {
+        System.setOut(this.stdout);
+        System.out.println("execute after method");
+    }
+
     @Test
     public void testDrawSquare() {
-        //Получаем ссылку на стандартный вывод в консоль
-        PrintStream stdout = System.out;
-        //Создаем буфер для хранения вывода
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        //Заменяем стандартный вывод в памятьдля тестирования.
-        System.setOut(new PrintStream(out));
-        //Выполняем действия пишущее в консоль
         new Paint().draw(new Square());
         //Проверяем реультат вычисления
         assertThat(
@@ -33,17 +45,10 @@ public class PaintTest {
                         .toString()
                 )
         );
-        //Возращаем обратно стандартный вывод в консоле
-        System.setOut(stdout);
-
     }
 
     @Test
     public void testDrawTriangle() {
-
-        PrintStream stdout = System.out;
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
         new Paint().draw(new Triangle());
 
         assertThat(
@@ -57,8 +62,5 @@ public class PaintTest {
                                 .toString()
                 )
         );
-        //Возращаем обратно стандартный вывод в консоле
-        System.setOut(stdout);
     }
-
 }
