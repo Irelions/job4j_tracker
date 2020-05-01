@@ -1,5 +1,7 @@
 package ru.job4j.ex;
 
+import javax.swing.text.TableView;
+
 public class FindEl {
 
     public static int indexOf(String[] value, String key) throws ElementNotFoundException {
@@ -19,16 +21,29 @@ public class FindEl {
     }
 
     public static boolean sent(String value, String[] abuses) throws ElementAbuseException {
-        // if contains throw ElementAbuseException
+        for (int index = 0; index != abuses.length; index++) {
+            if (abuses[index].equals(value)) {
+                throw new ElementAbuseException("Item is in the forbidden list");
+            }
+        }
         return true;
     }
 
-    public static void main(String[] args) {
+    public static void process(String[] values, String key, String[] abuses) {
         try {
-            String[] name = {"Igor", null, "Vasia"};
-            System.out.println(indexOf(name, "Anna"));
-        } catch (ElementNotFoundException e) {
+            if (indexOf(values, key) != -1) {
+                sent(key, abuses);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+            String[] value = {"Igor", null, "Anna"};
+            String key = "Anna";
+            String[] abuses = {"Anna"};
+
+            process(value, key, abuses);
     }
 }
