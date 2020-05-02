@@ -8,7 +8,8 @@ public class UserStore {
             if (users[index].getUsername().equals(login)) {
                 user = users[index];
                 break;
-            } else {
+            }
+            if (user == null) {
                 throw new UserNotFoundException("User is not found");
             }
         }
@@ -16,8 +17,10 @@ public class UserStore {
     }
 
     public static boolean validate(User user) throws UserInvalidException {
-        if (!user.isValid() || user.getUsername().length() < 3) {
+        if (!user.isValid()) {
             throw new UserInvalidException("Invalid login");
+        } else if (user.getUsername().length() < 3) {
+            throw new UserInvalidException("Login has less than 3 characters");
         }
         return true;
     }
@@ -27,7 +30,7 @@ public class UserStore {
             new User("Evgeniy Ivanov", true)
         };
         try {
-            User user = findUser(users, "Evgeniy Ivanov");
+            User user = findUser(users, "Evgeniy");
             if (validate(user)) {
             System.out.println("This user has an access");
         }
