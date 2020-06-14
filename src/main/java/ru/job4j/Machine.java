@@ -1,16 +1,10 @@
 package ru.job4j;
 
+import java.util.Arrays;
+
 public class Machine {
 
     private int[] coins = {10, 5, 2, 1};
-
-    private int[] compress(int[] array, int size) {
-        int[] rst = new int[size];
-        for (int index = 0; index < size; index++) {
-            rst[index] = array[index];
-        }
-        return rst;
-    }
 
     public int[] change(int price, int value) {
         int size = value - price;
@@ -31,6 +25,6 @@ public class Machine {
                 break;
             }
         }
-        return compress(rst, count);
+        return Arrays.copyOf(rst, count);
     }
 }
