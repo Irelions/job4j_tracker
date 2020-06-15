@@ -13,14 +13,12 @@ public class PhoneDictionary {
         ArrayList<Person> result = new ArrayList<>();
         key = key.toLowerCase();
 
-        for (int i = 0; i < persons.size(); i++) {
-            String tempString = persons.get(i).getName() + " "
-                    + persons.get(i).getSurname() + " "
-                    + persons.get(i).getPhone() + " "
-                    + persons.get(i).getAddress();
-            tempString = tempString.toLowerCase();
-            if (tempString.contains(key)) {
-                result.add(persons.get(i));
+        for (Person person: persons) {
+            if (person.getName().toLowerCase().contains(key)
+            || person.getSurname().toLowerCase().contains(key)
+            || person.getPhone().toLowerCase().contains(key)
+            || person.getAddress().toLowerCase().contains(key)) {
+                result.add(person);
             }
         }
         return result;
