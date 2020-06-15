@@ -7,23 +7,21 @@ public class Machine {
     private int[] coins = {10, 5, 2, 1};
 
     public int[] change(int price, int value) {
-        int size = value - price;
-        int[] rst = new int[size];
+        int surrender = value - price;
+        int[] rst = new int[Math.abs(surrender)];
         int count = 0;
 
-        for (int index = 0; index < rst.length; index++) {
-            if (size > 0) {
-                for (int j = 0; j < coins.length; j++) {
-                    if (coins[j] <= size) {
-                        size -= coins[j];
-                        rst[index] = coins[j];
-                        count++;
-                        break;
-                    }
+        if (surrender > 0) {
+            for (int coin : coins) {
+                while (coin <= surrender) {
+                    surrender -= coin;
+                    rst[count] = coin;
+                    count++;
                 }
-            } else {
-                break;
             }
+        } else if (surrender < 0) {
+            rst[0] = 0;
+            count++;
         }
         return Arrays.copyOf(rst, count);
     }
