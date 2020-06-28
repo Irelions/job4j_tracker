@@ -2,14 +2,16 @@ package ru.job4j.tracker;
 
 import ru.job4j.Item;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tracker2 {
-    private final Item[] items = new Item[100];
+    private final List<Item> items = new ArrayList<>();
     private int ids = 1;
-    private int size = 0;
 
     public Item add(Item item) {
-        item.setId(generateId());
-        items[size++] = item;
+       item.setId(generateId());
+        items.add(item);
         return item;
     }
 
@@ -19,11 +21,9 @@ public class Tracker2 {
 
     public Item findById(String id) {
         Item rsl = null;
-        for (int index = 0; index < size; index++) {
-            Item item = items[index];
-            if (item.getId().equals(id)) {
-                rsl = item;
-                break;
+        for (Item tempItem : items) {
+            if (tempItem.getId().equals(id)) {
+                rsl = tempItem;
             }
         }
         return rsl;
