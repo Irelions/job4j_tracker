@@ -49,7 +49,7 @@ public class Tracker {
     public List<Item> findByName(String key) {
         List<Item> array = items;
         for (Item item : items) {
-            if (item.equals(key)) {
+            if (item.getName().equals(key)) {
                 array.add(item);
             }
         }

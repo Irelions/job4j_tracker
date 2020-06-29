@@ -26,6 +26,7 @@ public class Item {
         this.name = name;
     }
 
+    @Override
     public String toString() {
         return this.id + " - " + this.name;
     }
