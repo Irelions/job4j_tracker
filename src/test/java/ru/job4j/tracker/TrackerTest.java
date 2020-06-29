@@ -2,12 +2,15 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertEquals;
 
 public class TrackerTest {
+
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
@@ -27,9 +30,9 @@ public class TrackerTest {
         tracker.add(itemTwo);
         tracker.add(itemThree);
 
-        Item[] result = tracker.findAll();
+        List<Item> result = tracker.findAll();
         int size = 3;
-        assertEquals(result.length, size);
+        assertEquals(result.size(), size);
     }
 
     @Test
@@ -42,11 +45,11 @@ public class TrackerTest {
         tracker.add(itemTwo);
         tracker.add(itemThree);
 
-        Item[] result = tracker.findByName("Book");
+        List<Item> result = tracker.findByName("Book");
         int size = 2;
-        assertEquals(result.length, size);
-        assertThat(result[0].getId(), is(itemOne.getId()));
-        assertThat(result[1].getId(), is(itemTwo.getId()));
+        assertEquals(result.size(), size);
+        assertThat(result.get(0).getId(), is(itemOne.getId()));
+        assertThat(result.get(1).getId(), is(itemTwo.getId()));
     }
 
     @Test
